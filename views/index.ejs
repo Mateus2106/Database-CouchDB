@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Apache CouchDB</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/Style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
+	<body>
+
+		<style type="text/css">
+			p{
+				text-align: left;
+			}
+			.borda{
+				border-style: solid;
+				border-width: 2px;
+				border-color: #333333;
+			}
+			.btnD{
+				color: white;
+				background-color: #17a2b8;
+				border-width: 1px;
+				border-style: solid;
+				border-color: #118091;
+				margin-bottom: 1px;
+			}
+			.bordal{
+				margin: 0;
+			    font-family: inherit;
+			    font-size: inherit;
+			    line-height: inherit;
+			    border-style: solid;
+				border-width: 1px;
+				border-color: #A8A8A8;
+			}
+			.txt{
+				text-align: center;
+			}
+		</style>
+
+		<div class="container">
+			<div class="row btnD" >
+				<div class="col-1"></div>
+				<div class="col-3"><h1>CouchDB</h1></div>
+				<div class="col-8"></div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row borda">
+				<div class="col-2"></div>
+				<div class="col-8">
+					<h3 class="txt">Apache CouchDB</h3>
+					<p>É um banco de dados não-relacional (NoSQL) que usa JSON para armazenar os dados, JavaScript como sua linguagem de consulta usando o MapReduce, e HTTP como API. Uma de suas características marcantes é a facilidade na replicação. CouchDB foi lançado em 2005, e em 2008 tornou-se um projeto da Apache Software Foundation.</p>
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-6 bordal">
+					<h4>Características</h4>
+					<p>Ao contrário de um banco de dados relacional, o CouchDB não armazena os dados e relacionamentos em tabelas. Cada banco de dados é uma coleção de documentos independentes, e cada documento mantém seus próprios dados e esquemas. Uma aplicação pode acessar vários bancos de dados, por exemplo, no smartphone do usuário e outro em um servidor. Os metadados do documento contém informações de revisão, possibilitando mesclar quaisquer diferenças que possam ter ocorrido enquanto os bancos de dados estavam desconectados.</p>
+				</div>
+				<div class="col-6 bordal">
+					<p></p>
+					<p>CouchDB implementa uma forma de Controle de concorrência multiversão (MVCC), a fim de evitar a necessidade de travar o arquivo de banco de dados durante as gravações. Os conflitos são deixados para a aplicação de resolver. Resolver um conflito geralmente envolve primeira mesclagem de dados em um dos documentos, apagando o antigo.</p>
+
+					<p>Outras características são a semântica ACID com consistência eventual, MapReduce, replicação incremental e tolerância a falhas. A administração é suportada com uma aplicação web embutida chamado Futon.</p>
+				</div>
+			</div>
+
+			<div class="row borda">
+				<div class="col">
+					<h4>Modo de Instalação:</h4>
+					<li>Instale o exe do Apache CouchDB disponibilizado neste site <a href="https://couchdb.apache.org" title="Apache CouchDB">aqui</a>.</li>
+					<li>Entre em <a href="localhost:5984/_utils/" title="Ferramenta de Vizualização do Apache CouchDB">"localhost:5984/_utils/"</a> e configure conforme seu projeto.</li>
+					<li>Encontre a pasta do seu projeto por meio do CMD e utilize o comando "npm init" (configure conforme seu projeto) este será o modelo do projeto.</li>
+					<li>Ainda na pasta executar o comando "npm install express body-parser ejs node-couchdb --save" para criar o controler e um diretório com as dependências necessárias.</li>
+					<li>Dentro do seu projeto crie a pasta "views" e nela crie o arquivo "index.ejs"</li>
+					<br/>
+					<p>Com tudo pronto, basta iniciar seu projeto utilizando o comando "node nomedocontroler" pelo CMD</p>
+
+				</div>
+			</div>
+
+
+			<br/>
+
+
+
+			<!-- tavela do CRUD -->
+
+			<div>
+				<div class="row">
+					<div class="col">
+						<h4>Adicionar Cliente</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<form method="post" action="/customer/add">
+							<input type="text" name="name" placeholder="Name">
+							<input type="text" name="email" placeholder="Email">
+							<input class="btnD" type="submit" value="Adicionar">
+						</form>		
+					</div>				
+				</div>
+
+				<br/>
+
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<h4>Clientes</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4 borda">
+							<h6 class="txt">Nome</h6>
+						</div>
+						<div class="col-4 borda">
+							<h6 class="txt">Email</h6>
+						</div>
+						<div class="col-4">
+							
+						</div>
+					</div>
+
+					<div class="row">
+
+						<% customers.forEach(function(customer){ %>
+
+							<div class="col-4 bordal">
+								<%= customer.value.name %>
+							</div>
+							<div class="col-4 bordal">
+								<%= customer.value.email %>
+							</div>
+							<div class="col-4">
+								<form method="post" action="/customer/delete/<%= customer.key %>"> 
+									<input type="hidden"value="<%= customer.value.rev %>"name="rev">
+									<input class="btnD" type="submit" value="Deletar">
+								</form>
+							</div>
+
+						<% }); %>
+					</div>	
+				</div>
+			</div>
+
+			<br><br><br><br><br>
+
+			<div class="row btnD">
+				<div class="col">
+					<p style="text-align: center;">₢Kelvin & ₢Mateus</p>
+				</div>
+			</div>
+
+
+		</div>
+	</body>
+</html>
+
